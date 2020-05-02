@@ -37,14 +37,10 @@ lcd.print("   Welcome To   ");
 lcd.setCursor(0,1);
 lcd.print("Countdown  Timer");
 tdown.setInterval(print_time, 999);
+eeprom_read();
 delay(1000);
 lcd.clear();
-eeprom_read();
-
-//tdown.restart(); tdown.start(); 
-
 }
-
 
 void print_time(){
 time_s = time_s-1;
@@ -75,7 +71,7 @@ if(set==3){time_h++;}
 if(time_s>59){time_s=0;}
 if(time_m>59){time_m=0;}
 if(time_h>99){time_h=0;}
-eeprom_write();
+if(set>0){eeprom_write();}
 delay(200); 
 }
 
@@ -87,7 +83,7 @@ if(set==3){time_h--;}
 if(time_s<0){time_s=59;}
 if(time_m<0){time_m=59;}
 if(time_h<0){time_h=99;}
-eeprom_write();
+if(set>0){eeprom_write();}
 delay(200); 
 }
 
@@ -96,8 +92,7 @@ if(digitalRead (bt_start) == 0){ flag2=1;
   digitalWrite(relay, HIGH); 
   tdown.restart(); 
   tdown.start();
-  }
-
+}
 
 lcd.setCursor(0,0);
 if(set==0){lcd.print("      Timer     ");}
@@ -149,5 +144,3 @@ time_s =  EEPROM.read(1);
 time_m =  EEPROM.read(2);
 time_h =  EEPROM.read(3);
 }
-
-
