@@ -86,7 +86,7 @@ private:
 	uint32_t _previousMillis;
 
 	// Stores current counter value in milliseconds.
-	uint32_t _currentCountTime;
+	int32_t _currentCountTime;
 	uint32_t _startCountTime;
 
 	// Stores cached user's time.
